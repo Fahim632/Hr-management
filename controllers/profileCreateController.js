@@ -69,4 +69,15 @@ let holdProfile = async (req, res)=>{
     })
 }
 
-module.exports = { profileCreateController, getProfileShow, getSingleProfile, updateProfile, holdProfile }
+let getHoldProfile = async (req,res)=>{
+    let data = await profile.find({ishold: {$eq: true}})
+    res.send(data)
+}
+
+let deleteProfile = async (req,res)=>{
+    let {id} = req.params;
+    let data = await profile.findByIdAndDelete({_id:id})
+
+}
+
+module.exports = { profileCreateController, getProfileShow, getSingleProfile, updateProfile, holdProfile,getHoldProfile,deleteProfile }

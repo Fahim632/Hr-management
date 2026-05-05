@@ -5,7 +5,7 @@ require('dotenv').config()
 const express = require("express");
 const dbConnection = require('./config/dbConnection');
 const { registrationController, loginController, logoutController } = require('./controllers/authController');
-const { profileCreateController, getProfileShow, getSingleProfile, updateProfile, holdProfile } = require('./controllers/profileCreateController');
+const { profileCreateController, getProfileShow, getSingleProfile, updateProfile, holdProfile, getHoldProfile, deleteProfile } = require('./controllers/profileCreateController');
 const app = express();
 
 app.use(express.json());
@@ -24,11 +24,16 @@ app.get('/getprofile/:id', getSingleProfile);
 app.post('/update/:id',updateProfile);
 //hold profile
 app.post('/hold',holdProfile);
+app.get('/grthold',getHoldProfile);
+
+//delete profile
+app.post('/delete/:id',deleteProfile )
+
 
 
 console.log(process.env.PORT);
 const port = process.env.PORT || 8000;
 
-app.listen(8000, () => {
+app.listen(port, () => {
     console.log(`server is running on port ${port}`);
 });
